@@ -12,10 +12,34 @@
 
     body {
       height: 100vh;
-      background: linear-gradient(135deg, #ffe4ec, #d9faff);
+      background: radial-gradient(ellipse at top, #1a0033 0%, #0a001a 50%, #000000 100%);
       overflow: hidden;
-      font-family: 'Segoe UI', cursive;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       position: relative;
+    }
+
+    /* Animated starry background */
+    body::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        radial-gradient(2px 2px at 20% 30%, white, transparent),
+        radial-gradient(2px 2px at 60% 70%, white, transparent),
+        radial-gradient(1px 1px at 50% 50%, white, transparent),
+        radial-gradient(1px 1px at 80% 10%, white, transparent),
+        radial-gradient(2px 2px at 90% 60%, white, transparent),
+        radial-gradient(1px 1px at 33% 80%, white, transparent),
+        radial-gradient(1px 1px at 15% 55%, white, transparent);
+      background-size: 200% 200%;
+      animation: stars 8s ease-in-out infinite;
+      opacity: 0.6;
+    }
+
+    @keyframes stars {
+      0%, 100% { transform: scale(1) translateY(0); opacity: 0.6; }
+      50% { transform: scale(1.1) translateY(-10px); opacity: 0.8; }
     }
 
     .center {
@@ -27,111 +51,160 @@
       z-index: 2;
     }
 
-
-
   .cake-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: end;
-  height: 100vh;
-  margin-top: -100px;
-}
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    height: 100vh;
+    margin-top: -100px;
+  }
 
-.cake {
-  position: relative;
-  width: 180px;
-  height: 180px;
-  margin-top: 100px;
-}
+  .cake {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    margin-top: 100px;
+    filter: drop-shadow(0 10px 30px rgba(255, 105, 180, 0.4));
+  }
 
-.layer {
-  position: absolute;
-  width: 100%;
-  height: 60px;
-  background: linear-gradient(to right, #8B4513, #D2691E);
-  border-radius: 15px;
-  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-}
+  .layer {
+    position: absolute;
+    width: 100%;
+    height: 65px;
+    background: linear-gradient(135deg, #ff1493 0%, #ff69b4 50%, #ff1493 100%);
+    border-radius: 20px;
+    box-shadow: 
+      0 8px 15px rgba(0,0,0,0.3),
+      inset 0 -5px 10px rgba(0,0,0,0.2),
+      inset 0 5px 10px rgba(255,255,255,0.3);
+    position: relative;
+    overflow: hidden;
+  }
 
-.layer-bottom {
-  bottom: 0;
-}
+  .layer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 10px;
+    background: linear-gradient(to right, #ffd700, #ffed4e, #ffd700);
+    border-radius: 20px 20px 0 0;
+  }
 
-.layer-middle {
-  bottom: 60px;
-  width: 160px;
-  left: 10px;
-}
+  .layer::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: radial-gradient(circle, #ff69b4, #ff1493);
+    border-radius: 50%;
+    top: 50%;
+    left: 20%;
+    transform: translateY(-50%);
+    box-shadow: 
+      60px 0 0 #ffd700,
+      120px 0 0 #00d4ff,
+      30px 0 0 #00ff88;
+  }
 
-.layer-top {
-  bottom: 120px;
-  width: 140px;
-  left: 20px;
-}
+  .layer-bottom {
+    bottom: 0;
+  }
 
-.candle {
-  position: absolute;
-  bottom: 180px;
-  width: 10px;
-  height: 30px;
-  background: #ffffff;
-  left: 50%;
-  margin-left: -15px;
-  transform: translateX(-50%);
-}
+  .layer-middle {
+    bottom: 65px;
+    width: 170px;
+    left: 15px;
+  }
 
-.candle:nth-child(5) {
-  left: 40%;
-}
-.candle:nth-child(6) {
-  left: 60%;
-}
+  .layer-top {
+    bottom: 130px;
+    width: 140px;
+    left: 30px;
+  }
 
-.flame {
-  position: absolute;
-  top: -15px;
-  left: 50%;
-  width: 10px;
-  height: 20px;
-  background: radial-gradient(circle, #ff0, orange, red);
-  border-radius: 50% 50% 50% 50%;
-  transform: translateX(-50%);
-  animation: flicker 0.2s infinite;
-  box-shadow: 0 0 10px orange;
-}
+  .candle {
+    position: absolute;
+    bottom: 200px;
+    width: 12px;
+    height: 40px;
+    background: linear-gradient(to bottom, #fff 0%, #f0f0f0 50%, #fff 100%);
+    left: 50%;
+    margin-left: -15px;
+    transform: translateX(-50%);
+    border-radius: 2px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+  }
 
-@keyframes flicker {
-  0%   { transform: translateX(-50%) scale(1); opacity: 1; }
-  50%  { transform: translateX(-50%) scale(1.1); opacity: 0.8; }
-  100% { transform: translateX(-50%) scale(1); opacity: 1; }
-}
+  .candle:nth-child(5) {
+    left: 40%;
+  }
+  .candle:nth-child(6) {
+    left: 60%;
+  }
 
+  .flame {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    width: 12px;
+    height: 25px;
+    background: radial-gradient(ellipse at center, #ffff00 0%, #ff9500 40%, #ff4500 70%, rgba(255,69,0,0) 100%);
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    transform: translateX(-50%);
+    animation: flicker 0.15s infinite, flameGlow 1.5s ease-in-out infinite;
+    box-shadow: 
+      0 0 20px #ff9500,
+      0 0 30px #ff4500,
+      0 0 40px rgba(255, 165, 0, 0.5);
+    filter: blur(0.5px);
+  }
 
+  @keyframes flicker {
+    0%   { transform: translateX(-50%) scale(1) rotate(-2deg); opacity: 1; }
+    25%  { transform: translateX(-50%) scale(1.08) rotate(2deg); opacity: 0.95; }
+    50%  { transform: translateX(-50%) scale(0.98) rotate(-1deg); opacity: 0.9; }
+    75%  { transform: translateX(-50%) scale(1.05) rotate(1deg); opacity: 0.95; }
+    100% { transform: translateX(-50%) scale(1) rotate(-2deg); opacity: 1; }
+  }
 
+  @keyframes flameGlow {
+    0%, 100% { filter: blur(0.5px) brightness(1); }
+    50% { filter: blur(1px) brightness(1.2); }
+  }
 
     h1 {
-      font-size: 3.5em;
+      font-size: 4em;
+      font-weight: 800;
       color: #fff;
-      background: linear-gradient(to right, #ff6ec4, #7873f5);
+      background: linear-gradient(45deg, #ff1493, #ff69b4, #ffd700, #00ff88, #00d4ff);
+      background-size: 300% 300%;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      animation: glow 2s ease-in-out infinite alternate;
+      animation: gradientShift 3s ease infinite, float 3s ease-in-out infinite;
+      text-shadow: 0 0 30px rgba(255, 105, 180, 0.5);
+      letter-spacing: 2px;
     }
 
     h2 {
-      font-size: 2em;
-      margin-top: 10px;
-      color: #ff69b4;
+      font-size: 1.8em;
+      margin-top: 20px;
+      color: #ffd700;
+      font-weight: 300;
+      text-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
       animation: floatText 4s ease-in-out infinite;
     }
 
-    @keyframes glow {
-      from {
-        text-shadow: 0 0 10px #ff6ec4, 0 0 20px #ff6ec4;
-      }
-      to {
-        text-shadow: 0 0 20px #7873f5, 0 0 40px #7873f5;
-      }
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-15px) scale(1.05); }
     }
 
     @keyframes floatText {
@@ -141,19 +214,20 @@
 
     .confetti span {
       position: absolute;
-      width: 10px;
-      height: 10px;
+      width: 12px;
+      height: 12px;
       background: hsl(calc(var(--i) * 36), 100%, 70%);
       border-radius: 50%;
       top: -20px;
       left: calc(var(--i) * 10%);
       animation: confettiFall 5s linear infinite;
       animation-delay: calc(var(--i) * 0.4s);
+      box-shadow: 0 0 10px hsl(calc(var(--i) * 36), 100%, 70%);
     }
 
     @keyframes confettiFall {
       0% { transform: translateY(-10px) rotate(0deg); opacity: 1; }
-      100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+      100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
     }
 
     .ribbons {
@@ -166,11 +240,12 @@
     }
 
     .ribbon {
-      width: 16px;
-      height: 180px;
-      background: linear-gradient(to bottom, #ff66cc, #ffa07a);
-      border-radius: 8px;
+      width: 20px;
+      height: 200px;
+      background: linear-gradient(to bottom, #ff1493, #ff69b4, #ffd700);
+      border-radius: 10px;
       animation: swing 3s ease-in-out infinite alternate;
+      box-shadow: 0 5px 15px rgba(255, 20, 147, 0.5);
     }
 
     .ribbon:nth-child(odd) {
@@ -178,8 +253,8 @@
     }
 
     @keyframes swing {
-      0% { transform: rotate(3deg); }
-      100% { transform: rotate(-3deg); }
+      0% { transform: rotate(5deg); }
+      100% { transform: rotate(-5deg); }
     }
 
     .streamers {
@@ -192,123 +267,147 @@
     }
 
     .streamer {
-      width: 10px;
-      height: 100px;
+      width: 12px;
+      height: 120px;
       background: repeating-linear-gradient(
         45deg,
-        #ff69b4,
-        #ff69b4 10px,
-        #ffa07a 10px,
-        #ffa07a 20px
+        #ff1493,
+        #ff1493 12px,
+        #ffd700 12px,
+        #ffd700 24px
       );
-      margin: 0 8px;
-      border-radius: 5px;
+      margin: 0 10px;
+      border-radius: 6px;
       animation: bounce 1.5s infinite ease-in-out;
+      box-shadow: 0 5px 15px rgba(255, 20, 147, 0.4);
     }
 
     @keyframes bounce {
-      0% { transform: scaleY(1); }
-      100% { transform: scaleY(1.3); }
+      0%, 100% { transform: scaleY(1); }
+      50% { transform: scaleY(1.3); }
     }
 
     .hearts {
       position: absolute;
       top: 20%;
       left: 5%;
-      font-size: 2em;
+      font-size: 2.5em;
       animation: floatHearts 6s ease-in-out infinite;
+      filter: drop-shadow(0 0 10px rgba(255, 105, 180, 0.8));
     }
 
     @keyframes floatHearts {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-20px); }
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-30px) scale(1.1); }
     }
 
-    /* 🎈 Bouncing Balloons */
     .balloons {
       position: absolute;
       bottom: -100px;
       left: 50%;
       transform: translateX(-50%);
       display: flex;
-      gap: 40px;
+      gap: 50px;
       z-index: 1;
-      animation: riseUp 5s ease-in-out infinite;
+      animation: riseUp 8s ease-in-out infinite;
     }
 
     .balloon {
-      width: 40px;
-      height: 60px;
+      width: 50px;
+      height: 70px;
       border-radius: 50% 50% 45% 45%;
       position: relative;
       background: red;
       animation: balloonBounce 2s ease-in-out infinite;
+      box-shadow: 
+        inset -10px -10px 20px rgba(0,0,0,0.2),
+        0 10px 30px rgba(0,0,0,0.3);
+    }
+
+    .balloon::before {
+      content: '';
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: rgba(255,255,255,0.4);
+      border-radius: 50%;
+      top: 15px;
+      left: 15px;
     }
 
     .balloon::after {
       content: '';
       position: absolute;
-      bottom: -10px;
+      bottom: -12px;
       left: 50%;
       width: 2px;
-      height: 20px;
-      background: #555;
+      height: 60px;
+      background: linear-gradient(to bottom, #555, transparent);
       transform: translateX(-50%);
     }
 
-    .balloon:nth-child(1) { background: #ff6ec4; }
-    .balloon:nth-child(2) { background: #87ceeb; }
-    .balloon:nth-child(3) { background: #98fb98; }
-    .balloon:nth-child(4) { background: #ffa07a; }
+    .balloon:nth-child(1) { background: linear-gradient(135deg, #ff1493, #ff69b4); animation-delay: 0s; }
+    .balloon:nth-child(2) { background: linear-gradient(135deg, #00d4ff, #87ceeb); animation-delay: 0.3s; }
+    .balloon:nth-child(3) { background: linear-gradient(135deg, #00ff88, #98fb98); animation-delay: 0.6s; }
+    .balloon:nth-child(4) { background: linear-gradient(135deg, #ffd700, #ffa07a); animation-delay: 0.9s; }
 
     @keyframes balloonBounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-20px); }
+      0%, 100% { transform: translateY(0) rotate(-5deg); }
+      50% { transform: translateY(-25px) rotate(5deg); }
     }
 
     @keyframes riseUp {
-      0% { bottom: -100px; }
-      100% { bottom: 110%; }
+      0% { bottom: -100px; opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { bottom: 110%; opacity: 0; }
     }
-
-
-
 
     audio {
       display: none;
     }
-  </style>
-</head>
-<body>
-  <!-- Auto-playing Happy Birthday Song -->
-    <div id="start-screen" onclick="startMusic()" style="
+
+    #start-screen {
       position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: #111;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #1a0033, #3d0066, #1a0033);
+      background-size: 200% 200%;
+      animation: bgShift 3s ease infinite;
       color: #fff;
-      font-size: 2rem;
+      font-size: 2.2rem;
+      font-weight: 600;
       display: flex;
       justify-content: center;
       align-items: center;
       z-index: 9999;
-      cursor: pointer;">
-    Tap to Start the Birthday Party 🎉
+      cursor: pointer;
+      text-align: center;
+      padding: 20px;
+      transition: opacity 0.5s ease;
+    }
+
+    #start-screen:hover {
+      background: linear-gradient(135deg, #3d0066, #5c0099, #3d0066);
+    }
+
+    @keyframes bgShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+  </style>
+</head>
+<body>
+  <div id="start-screen" onclick="startMusic()">
+    🎉 Tap to Start the Birthday Party 🎉
   </div>
 
-
-
-
-
-<audio id="bday-audio" loop>
+  <audio id="bday-audio" loop>
     <source src="birthday.mp3" type="audio/mpeg">
   </audio>
 
-
-
-
-
-  <!-- Confetti -->
   <div class="confetti">
     <span style="--i: 1;"></span>
     <span style="--i: 2;"></span>
@@ -322,7 +421,6 @@
     <span style="--i: 10;"></span>
   </div>
 
-  <!-- Ribbons -->
   <div class="ribbons">
     <div class="ribbon"></div>
     <div class="ribbon"></div>
@@ -331,43 +429,35 @@
     <div class="ribbon"></div>
   </div>
 
-  <!-- Center message -->
   <div class="center">
     <h1>🎉 Happy Birthday Arpita 🎂</h1>
-    <h2>Wishing you both lots of joy and surprises!</h2>
+    <h2>Wishing you lots of joy and surprises!</h2>
   </div>
 
-  <!-- Cake -->
-   <div class="cake-wrapper">
-  <div class="cake">
-    <div class="layer layer-bottom"></div>
-    <div class="layer layer-middle"></div>
-    <div class="layer layer-top"></div>
+  <div class="cake-wrapper">
+    <div class="cake">
+      <div class="layer layer-bottom"></div>
+      <div class="layer layer-middle"></div>
+      <div class="layer layer-top"></div>
 
-    <!-- 5 Candles -->
-    <div class="candle" style="left: 25%;">
-      <div class="flame"></div>
-    </div>
-    <div class="candle" style="left: 40%;">
-      <div class="flame"></div>
-    </div>
-    <div class="candle" style="left: 50%;">
-      <div class="flame"></div>
-    </div>
-    <div class="candle" style="left: 60%;">
-      <div class="flame"></div>
-    </div>
-    <div class="candle" style="left: 75%;">
-      <div class="flame"></div>
+      <div class="candle" style="left: 25%;">
+        <div class="flame"></div>
+      </div>
+      <div class="candle" style="left: 40%;">
+        <div class="flame"></div>
+      </div>
+      <div class="candle" style="left: 50%;">
+        <div class="flame"></div>
+      </div>
+      <div class="candle" style="left: 60%;">
+        <div class="flame"></div>
+      </div>
+      <div class="candle" style="left: 75%;">
+        <div class="flame"></div>
+      </div>
     </div>
   </div>
-</div>
 
-
-
-
-
-  <!-- Streamers -->
   <div class="streamers">
     <div class="streamer"></div>
     <div class="streamer"></div>
@@ -375,31 +465,29 @@
     <div class="streamer"></div>
   </div>
 
-  <!-- Hearts -->
   <div class="hearts">💖💗💖</div>
 
-  <!-- Bouncing Balloons -->
   <div class="balloons">
     <div class="balloon"></div>
     <div class="balloon"></div>
     <div class="balloon"></div>
     <div class="balloon"></div>
   </div>
-</body>
-</html>
 
   <script>
     function startMusic() {
       const audio = document.getElementById("bday-audio");
       audio.play().then(() => {
-        document.getElementById("start-screen").style.display = "none";
+        const startScreen = document.getElementById("start-screen");
+        startScreen.style.opacity = "0";
+        setTimeout(() => {
+          startScreen.style.display = "none";
+        }, 500);
       }).catch(err => {
         alert("Browser blocked autoplay. Please tap again.");
         console.error(err);
       });
     }
-
- 
   </script>
-
-
+</body>
+</html>
